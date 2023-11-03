@@ -1,0 +1,41 @@
+Source: multisense-ros
+Priority: optional
+Section: devel
+Build-Depends: debhelper (>= 12),
+ libopencv-dev,
+ libboost-dev,
+# Need 1.7 to get MRBUILD_VERSION. VERSION conflicts with the upstream build
+ mrbuild ( >= 1.7 ),
+ libturbojpeg0-dev,
+ libeigen3-dev,
+# ros
+ libroscpp-dev,
+ libdynamic-reconfigure-config-init-mutex-dev,
+ libsensor-msgs-dev,
+ libopencv-dev,
+ python3-gencpp,
+ ros-geometry-msgs,
+ ros-sensor-msgs,
+ ros-std-msgs,
+ libangles-dev,
+ librosbag-storage-dev,
+ libtf2-geometry-msgs-dev,
+ libtf2-ros-dev,
+ libdiagnostic-updater-dev,
+ libimage-geometry-dev,
+ libimage-transport-dev,
+ libstereo-msgs-dev
+Maintainer: Dima Kogan <dima@secretsauce.net>
+Uploaders: Dima Kogan <dima@secretsauce.net>
+Standards-Version: 3.9.8
+Vcs-Git: https://github.com/carnegierobotics/multisense_ros.git
+Vcs-Browser: https://github.com/carnegierobotics/multisense_ros.git
+
+Package: multisense-ros
+Architecture: any
+Depends: ${shlibs:Depends}, ${misc:Depends}
+Description: MultiSense ROS driver
+ The ROS driver for CRL MultiSense cameras
+ .
+ Wrappers, drivers, tools and additional API's for using MultiSense S27, S30,
+ KS21, SL, S7, S7S, S21, M, ST21, BCAM with ROS
