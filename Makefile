@@ -70,24 +70,28 @@ LDLIBS +=					\
   -ldynamic_reconfigure_config_init_mutex	\
   -lconsole_bridge
 
-# I'm writing a bunch of files from one command. This MUST be a pattern rule to
-# communicate this fact to Make
-
-# NEED TO DO DIFFERENTLY. GROUPED PREREQUISITES APPEARED IN make 4.3. Not
-# available in ubuntu 20.04
-
 # I must set up dependendies on generated files manually. I don't want to deeply
 # figure out what all the .o files are that transitively include the generated
 # headers, so I make ALL .o files depend on these
 ALL_O_FILES := $(addsuffix .o,$(basename $(LIB_SOURCES)) \
                               $(basename $(BIN_SOURCES)) )
 
-ALL_GENERATED_CONFIG_H := $(shell awk -F'[<>]' '/include.*Config.h/ {print $$2}'  multisense_ros/include/multisense_ros/reconfigure.h)
-ALL_GENERATED_CONFIG_H := $(addprefix multisense_ros/include/,$(ALL_GENERATED_CONFIG_H))
+ALL_GENERATED_CONFIG_H      := $(shell awk -F'[<>]' '/include.*Config.h/ {print $$2}'  multisense_ros/include/multisense_ros/reconfigure.h)
+ALL_GENERATED_CONFIG_H_NO_M := $(addprefix ultisense_ros/include/,$(ALL_GENERATED_CONFIG_H))
+ALL_GENERATED_CONFIG_H      := $(addprefix m,$(ALL_GENERATED_CONFIG_H_NO_M))
 
 $(ALL_O_FILES): $(ALL_GENERATED_CONFIG_H)
-#multisense_ros/include/multisense_ros/%Config.h: multisense_ros/cfg/multisense.cfg
-$(ALL_GENERATED_CONFIG_H) &: multisense_ros/cfg/multisense.cfg
+
+# I'm writing a bunch of files from one command. The nice way to communicate
+# this fact to Make is to use group prerequisites. Like this:
+#
+#   $(ALL_GENERATED_CONFIG_H) &: multisense_ros/cfg/multisense.cfg
+#
+# But they appeared in GNU Make 4.3, which isn't shipped with Ubuntu 20.04,
+# which I'm targeting. So instead I do it the old-fashioned way: using pattern
+# rules. There isn't a pattern here, so I do it in a hacky way: the initial "m"
+# is the wildcard in the pattern
+$(addprefix %,$(ALL_GENERATED_CONFIG_H_NO_M)): %ultisense_ros/cfg/multisense.cfg
 	python3 \
 	  $< \
 	  /usr/share/dynamic_reconfigure \
