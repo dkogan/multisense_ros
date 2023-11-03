@@ -1,0 +1,5 @@
+multisense-ros (6.1.0-1) unstable; urgency=medium
+
+  * Initial packaged release
+
+ -- Dima Kogan <dkogan@debian.org>  Fri, 03 Nov 2023 12:30:27 -0700
