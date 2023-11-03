@@ -2,3 +2,10 @@
 
 %:
 	dh $@
+
+# I add a symlink that the build uses to find their headers
+override_dh_auto_build:
+	cd multisense_lib/sensor_api/source/LibMultiSense/include && ln -fs MultiSense multisense_lib
+	dh_auto_build
+
+
