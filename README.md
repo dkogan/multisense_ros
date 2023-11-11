@@ -1,3 +1,10 @@
+# De-catkinized, de-cmaked, packaged build
+
+This is a fork of the multisense driver, with a cleaned-up build and
+distribution mechanism. The bulk of the ROS mess has been removed, for superior
+clarity and debuggability
+
+
 # multisense_ros
 
 Wrappers, drivers, tools and additional API's for using MultiSense S27, S30, KS21, SL, S7, S7S, S21, M, ST21, BCAM  with ROS.
