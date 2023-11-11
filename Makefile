@@ -82,6 +82,15 @@ ALL_GENERATED_CONFIG_H      := $(addprefix m,$(ALL_GENERATED_CONFIG_H_NO_M))
 
 $(ALL_O_FILES): $(ALL_GENERATED_CONFIG_H)
 
+
+# Set the ROS_ROOT. The OSRF packages already set this, but they do it wrong: I
+# want /opt/ros/noetic, not /opt/ros/noetic/share/ros
+ifeq ($(ROS_DISTRO),)
+  ROS_ROOT := /usr
+else
+  ROS_ROOT := /opt/ros/$(ROS_DISTRO)
+endif
+
 # I'm writing a bunch of files from one command. The nice way to communicate
 # this fact to Make is to use group prerequisites. Like this:
 #
@@ -94,7 +103,7 @@ $(ALL_O_FILES): $(ALL_GENERATED_CONFIG_H)
 $(addprefix %,$(ALL_GENERATED_CONFIG_H_NO_M)): %ultisense_ros/cfg/multisense.cfg
 	python3 \
 	  $< \
-	  /usr/share/dynamic_reconfigure \
+	  $(ROS_ROOT)/share/dynamic_reconfigure \
 	  BINARY_DIR_UNUSED \
 	  $(dir $@) \
 	  PYTHON_GEN_DIR_UNUSED
@@ -110,15 +119,15 @@ ALL_GENERATED_MSG_H := $(patsubst multisense_ros/msg/%.msg,multisense_ros/includ
 $(ALL_O_FILES): $(ALL_GENERATED_MSG_H)
 multisense_ros/include/multisense_ros/%.h: multisense_ros/msg/%.msg
 	python3 \
-	  /usr/lib/gencpp/gen_cpp.py \
+	  $(ROS_ROOT)/lib/gencpp/gen_cpp.py \
 	  $< \
 	  -Imultisense_ros:multisense_ros/msg \
-	  -Isensor_msgs:/usr/share/sensor_msgs/msg \
-	  -Igeometry_msgs:/usr/share/geometry_msgs/msg \
-	  -Istd_msgs:/usr/share/std_msgs/msg \
+	  -Isensor_msgs:$(ROS_ROOT)/share/sensor_msgs/msg \
+	  -Igeometry_msgs:$(ROS_ROOT)/share/geometry_msgs/msg \
+	  -Istd_msgs:$(ROS_ROOT)/share/std_msgs/msg \
 	  -p multisense_ros \
 	  -o multisense_ros/include/multisense_ros/ \
-	  -e /usr/share/gencpp
+	  -e $(ROS_ROOT)/share/gencpp
 EXTRA_CLEAN += $(ALL_GENERATED_MSG_H)
 
 
@@ -135,12 +144,21 @@ CCXXFLAGS +=							\
   -I/usr/include/opencv4
 
 # For ROS
-CXXFLAGS += \
-  -I/usr/include/pluginlib \
-  -I/usr/include/class_loader \
-  -I/usr/include/rcutils \
-  -I/usr/include/rcpputils \
-  -I/usr/include/ament_index_cpp \
-  -I/usr/include/angles
+ifeq ($(ROS_DISTRO),)
+  # Using the vanilla Debian packages
+  CXXFLAGS += \
+    -I/usr/include/pluginlib \
+    -I/usr/include/class_loader \
+    -I/usr/include/rcutils \
+    -I/usr/include/rcpputils \
+    -I/usr/include/ament_index_cpp \
+    -I/usr/include/angles
+else
+  # OSRF packages
+  CXXFLAGS += \
+    -I$(ROS_ROOT)/include
+
+  LDFLAGS += $(addprefix -L,$(LD_LIBRARY_PATH))
+endif
 
 include /usr/include/mrbuild/Makefile.common.footer
