@@ -2,3 +2,9 @@
 
 %:
 	dh $@
+
+# If we have a ROS_DISTRO, use the OSRF-packaged ROS
+override_dh_auto_build:
+	$(if $(ROS_DISTRO),. /opt/ros/$(ROS_DISTRO)/setup.sh; )dh_auto_build
+
+
