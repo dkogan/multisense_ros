@@ -7,11 +7,11 @@ Build-Depends: debhelper (>= 12),
 # Need 1.7 to get MRBUILD_VERSION. VERSION conflicts with the upstream build
  mrbuild ( >= 1.7 ),
  libturbojpeg0-dev,
+ libeigen3-dev,
 # ros
  libroscpp-dev,
  libdynamic-reconfigure-config-init-mutex-dev,
  libsensor-msgs-dev,
- libeigen3-dev,
  libopencv-dev,
  python3-gencpp,
  ros-geometry-msgs,
