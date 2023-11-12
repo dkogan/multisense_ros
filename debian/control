@@ -9,22 +9,34 @@ Build-Depends: debhelper (>= 12),
  libturbojpeg0-dev,
  libeigen3-dev,
 # ros
- libroscpp-dev,
- libdynamic-reconfigure-config-init-mutex-dev,
- libsensor-msgs-dev,
- libopencv-dev,
- python3-gencpp,
- ros-geometry-msgs,
- ros-sensor-msgs,
- ros-std-msgs,
- libangles-dev,
- librosbag-storage-dev,
- libtf2-geometry-msgs-dev,
- libtf2-ros-dev,
- libdiagnostic-updater-dev,
- libimage-geometry-dev,
- libimage-transport-dev,
- libstereo-msgs-dev
+#
+# stock Debian ROS packages
+#  libroscpp-dev,
+#  libdynamic-reconfigure-config-init-mutex-dev,
+#  libsensor-msgs-dev,
+#  libopencv-dev,
+#  python3-gencpp,
+#  ros-geometry-msgs,
+#  ros-sensor-msgs,
+#  ros-std-msgs,
+#  libangles-dev,
+#  librosbag-storage-dev,
+#  libtf2-geometry-msgs-dev,
+#  libtf2-ros-dev,
+#  libdiagnostic-updater-dev,
+#  libimage-geometry-dev,
+#  libimage-transport-dev,
+#  libstereo-msgs-dev
+# OSRF packages
+ ros-noetic-dynamic-reconfigure,
+ ros-noetic-sensor-msgs,
+ ros-noetic-tf2,
+ ros-noetic-tf2-geometry-msgs,
+ ros-noetic-diagnostic-updater,
+ ros-noetic-image-geometry,
+ ros-noetic-image-transport,
+ ros-noetic-stereo-msgs,
+ ros-noetic-angles
 Maintainer: Dima Kogan <dima@secretsauce.net>
 Uploaders: Dima Kogan <dima@secretsauce.net>
 Standards-Version: 3.9.8
