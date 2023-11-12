@@ -5,8 +5,16 @@
 
 # I add a symlink that the build uses to find their headers
 # And if we have a ROS_DISTRO, use the OSRF-packaged ROS
+#
+# Remove the build date from the metadata
+# - I want the build to be reproducible
+# - I want ccache to work
+#
+# I do these here instead of debian/patches because multisense_lib/sensor_api is
+# a git submodule
 override_dh_auto_build:
 	cd multisense_lib/sensor_api/source/LibMultiSense/include && ln -fs MultiSense multisense_lib
+	perl -p -i -e 's/(v.apiBuildDate *)=.*;/$$1= "unknown";/g' multisense_lib/sensor_api/source/LibMultiSense/details/public.cc
 	$(if $(ROS_DISTRO),. /opt/ros/$(ROS_DISTRO)/setup.sh; )dh_auto_build
 
 
