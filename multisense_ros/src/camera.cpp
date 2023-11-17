@@ -43,7 +43,7 @@
 #include <tf2/LinearMath/Transform.h>
 #include <tf2_geometry_msgs/tf2_geometry_msgs.h>
 
-#include <multisense_lib/MultiSenseChannel.hh>
+#include <MultiSense/MultiSenseChannel.hh>
 #include <multisense_ros/camera.h>
 #include <multisense_ros/RawCamConfig.h>
 #include <multisense_ros/RawCamCal.h>

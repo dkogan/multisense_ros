@@ -41,7 +41,7 @@
 #include <sensor_msgs/Imu.h>
 #include <geometry_msgs/Vector3Stamped.h>
 
-#include <multisense_lib/MultiSenseChannel.hh>
+#include <MultiSense/MultiSenseChannel.hh>
 
 namespace multisense_ros {
 

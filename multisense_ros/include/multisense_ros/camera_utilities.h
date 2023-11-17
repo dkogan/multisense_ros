@@ -45,8 +45,8 @@
 #include <ros/ros.h>
 #include <sensor_msgs/CameraInfo.h>
 
-#include <multisense_lib/MultiSenseChannel.hh>
-#include <multisense_lib/MultiSenseTypes.hh>
+#include <MultiSense/MultiSenseChannel.hh>
+#include <MultiSense/MultiSenseTypes.hh>
 
 namespace multisense_ros {
 

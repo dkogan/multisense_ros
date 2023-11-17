@@ -44,7 +44,7 @@
 #include <tf2/LinearMath/Transform.h>
 #include <tf2_ros/static_transform_broadcaster.h>
 
-#include <multisense_lib/MultiSenseChannel.hh>
+#include <MultiSense/MultiSenseChannel.hh>
 
 namespace multisense_ros {
 

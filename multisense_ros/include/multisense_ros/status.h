@@ -36,7 +36,7 @@
 
 #include <ros/ros.h>
 
-#include <multisense_lib/MultiSenseChannel.hh>
+#include <MultiSense/MultiSenseChannel.hh>
 
 namespace multisense_ros {
 

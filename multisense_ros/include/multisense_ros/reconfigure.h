@@ -38,7 +38,7 @@
 #include <chrono>
 #include <thread>
 
-#include <multisense_lib/MultiSenseChannel.hh>
+#include <MultiSense/MultiSenseChannel.hh>
 
 #include <dynamic_reconfigure/server.h>
 #include <multisense_ros/sl_bm_cmv2000Config.h>

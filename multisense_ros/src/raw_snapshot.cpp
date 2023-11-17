@@ -42,7 +42,7 @@
 #include <multisense_ros/RawCamData.h>
 #include <multisense_ros/RawLidarData.h>
 #include <multisense_ros/RawLidarCal.h>
-#include <multisense_lib/MultiSenseTypes.hh>
+#include <MultiSense/MultiSenseTypes.hh>
 #include <stdio.h>
 #include <ros/callback_queue.h>
 

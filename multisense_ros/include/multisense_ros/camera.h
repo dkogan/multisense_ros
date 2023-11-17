@@ -50,7 +50,7 @@
 #include <sensor_msgs/PointCloud2.h>
 #include <tf2_ros/static_transform_broadcaster.h>
 
-#include <multisense_lib/MultiSenseChannel.hh>
+#include <MultiSense/MultiSenseChannel.hh>
 #include <multisense_ros/RawCamData.h>
 #include <multisense_ros/camera_utilities.h>
 #include <multisense_ros/ground_surface_utilities.h>
